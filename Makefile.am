@@ -32,7 +32,7 @@ pkgconfig_DATA = build/autotools/memtailor.pc
 # When making a distribution file, Automake knows to include all files
 # that are necessary to build the project. EXTRA_DIST specifies files
 # to include beyond those used in the build process.
-EXTRA_DIST = autogen.sh
+EXTRA_DIST = autogen.sh libs/gtest
 
 # set up tests to run on "make check"
 if with_gtest
@@ -40,8 +40,11 @@ if with_gtest
 TESTS=unittest
 check_PROGRAMS=$(TESTS)
 
-unittest_CXXFLAGS = -I$(top_srcdir)/src/ -std=gnu++0x
-unittest_LDFLAGS = $(top_builddir)/libmemtailor.la
+unittest_CXXFLAGS=\
+  -I$(top_srcdir)/libs/gtest/include\
+  -I$(top_srcdir)/libs/gtest/\
+  -I$(top_srcdir)/src/ -std=gnu++0x
+unittest_LDFLAGS = $(top_builddir)/libmemtailor.la -lpthread
 
 # test_LIBS=
 unittest_SOURCES=src/test/ArenaTest.cpp src/test/BufferPoolTest.cpp	\
