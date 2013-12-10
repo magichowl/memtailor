@@ -10,6 +10,9 @@ dnl  if autoconf is told the source code is in a directory that does not
 dnl  contain this file then it knows that the directory is wrong.
 AC_CONFIG_SRCDIR([src/memtailor.h])
 
+dnl New versions of Automake require AM_PROG_AR macro but Automake 1.11 doesn't recognize it.
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
+
 dnl ----- The gtest dependency
 
 AC_ARG_WITH([gtest], AS_HELP_STRING(
